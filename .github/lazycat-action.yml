@@ -1,0 +1,40 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/netbootxyz.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: netbootxyz
+
+build:
+  run_buildscript: false
+
+images:
+  - id: netbootxyz
+    target: service
+    service: netbootxyz
+    source: linuxserver/netbootxyz
+    channel: custom
+    sort: semver
+    tag_regex: '^version-0\.7\.\d+$'
+    version_regex: '^version-(?P<version>0\.7\.\d+)$'
+    version_template: '{version}'
+    delivery:
+      mode: mirror
+
+stores:
+  official:
+    enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: Netbootxyz
+    summary: 开源的PXE 引导服务器，用于网络引导操作系统安装

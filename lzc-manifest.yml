@@ -1,28 +1,21 @@
-lzc-sdk-version: "0.1"
-name: Netbootxyz⁠
-package: cloud.lazycat.app.netbootxyz
-version: 0.7.5
-description: 一个开源的PXE 引导服务器，用于网络引导操作系统安装
-homepage: https://netboot.xyz
-author: netbootxzy
 application:
   subdomain: netbootxyz
   background_task: true
   multi_instance: false
-  gpu_accel: false
-  kvm_accel: false
-  usb_accel: false
   public_path:
     - /
-  routes:
-    - /=http://netbootxyz.cloud.lazycat.app.netbootxyz.lzcapp:3000/
+  upstreams:
+    - location: /
+      backend: http://netbootxyz.cloud.lazycat.app.netbootxyz.lzcapp:3000/
   ingress:
     - protocol: udp
       port: 69
       service: netbootxyz
+
 services:
   netbootxyz:
-    image: registry.lazycat.cloud/czyt/linuxserver/netbootxyz:3210f01e18534a8a
+    # upstream: linuxserver/netbootxyz:version-0.7.6
+    image: docker.1ms.run/linuxserver/netbootxyz:version-0.7.6
     network_mode: host
     environment:
       - PUID=1000
@@ -36,6 +29,3 @@ services:
     binds:
       - /lzcapp/var/config:/config
       - /lzcapp/var/ISOs:/assets
-unsupported_platforms:
-  - ios
-  - android

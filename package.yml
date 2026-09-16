@@ -1,0 +1,17 @@
+package: cloud.lazycat.app.netbootxyz
+version: 0.7.5
+name: Netbootxyz
+description: "一个开源的PXE 引导服务器，用于网络引导操作系统安装"
+min_os_version: "1.5.0"
+homepage: https://netboot.xyz
+author: netbootxzy
+unsupported_platforms:
+  - ios
+  - android
+locales:
+  zh:
+    name: Netbootxyz
+    description: "一个开源的PXE 引导服务器，用于网络引导操作系统安装"
+  en:
+    name: Netbootxyz
+    description: "An open-source PXE boot server for network-booting OS installers"
